@@ -8,28 +8,39 @@ interface AppProps {
   buttonClick: () => string;
 }
 
-let a = [];
-
-export default function App(props: AppProps) {
-  const { heading, paragraph, buttonClick, buttonText } = props;
-  const onClickButton = () => {
-    buttonClick();
-    console.log('clicked button',paragraph);
-  };
-  return (
-    <div>
-      <h1>Hello {heading}</h1>
-      <p>Start editing to {paragraph}some magic happen{paragraph} :)</p>
-      <button onClick={onClickButton}>{buttonText}</button>
-    </div>
-  );
+interface State {
+  count: number;
 }
 
-// MainAPP
-//   onClickFunction
-//     App1 - props=> onClickFunction
-//       button
-//     App2- props=> onClickFunction
-//       button
-//     App3- props=> onClickFunction
-//       button
+class App extends React.Component<AppProps, State> {
+  heading: string;
+  paragraph: string;
+  constructor(props) {
+    super(props);
+
+    let { heading, paragraph } = props;
+    this.heading = heading;
+    this.paragraph = paragraph;
+    this.state = { count: 0 };
+  }
+  incrementCounter = () => {
+    console.log(this);
+    this.setState({
+      count: this.state.count + 1,
+    });
+  };
+
+  render() {
+    return (
+      <>
+        <h1>{this.heading}</h1>
+        Rest
+        <p>{this.paragraph}</p>
+        <span>{this.state.count}</span>
+        <button onClick={this.incrementCounter}>{this.state.count}</button>
+      </>
+    );
+  }
+}
+
+export default App;
