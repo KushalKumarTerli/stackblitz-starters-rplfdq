@@ -25,22 +25,20 @@ class App extends React.Component<AppProps, State> {
     this.state = { count: 0 };
   }
   incrementCounter = () => {
-    console.log(this);
     this.setState({
       count: this.state.count + 1,
     });
   };
 
   render() {
-    console.log(this);
     return (
       <>
         <h1>{this.heading}</h1>
-        Rest
-        <p>{this.paragraph}</p>
-        <span>{this.state.count}</span>
+        {/* <p>{this.paragraph}</p> */}
+        {/* <span>{this.state.count}</span> */}
         <button onClick={this.incrementCounter}>{this.state.count}</button>
-        <Button />
+        <Button key={1} appCount={this.state.count} />
+        {/* <Button key={2} /> */}
       </>
     );
   }

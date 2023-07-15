@@ -4,7 +4,9 @@ interface State {
   count: number;
 }
 
-interface Props {}
+interface Props {
+  appCount: number;
+}
 
 export class Button extends React.Component<Props, State> {
   constructor(props) {
@@ -17,9 +19,9 @@ export class Button extends React.Component<Props, State> {
   }
 
   incrementCounter = () => {
-    // this.setState({
-    //   count: this.state.count + 1,
-    // });
+    this.setState({
+      count: this.state.count + 1,
+    });
   };
 
   componentDidMount() {
@@ -27,7 +29,22 @@ export class Button extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', prevProps, prevState);
+    if (prevProps.appCount === 1) {
+      console.log(
+        'componentDidUpdate',
+        prevProps,
+        '->previous props:',
+        prevProps
+      );
+    }
+    if (this.props.appCount === 1) {
+      console.log(
+        'componentDidUpdate',
+
+        '->current props:',
+        this.props
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -36,7 +53,11 @@ export class Button extends React.Component<Props, State> {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('shouldComponentUpdate', nextProps, nextState);
-    return true;
+    if ([5, 6, 7].includes(nextProps.appCount)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   render() {
@@ -44,7 +65,12 @@ export class Button extends React.Component<Props, State> {
     return (
       <>
         <h1>Life Cycles</h1>
-        <button onClick={this.incrementCounter}>{this.state.count}</button>
+        <button onClick={this.incrementCounter}>{this.props.appCount}</button>
+        <span>
+          {' '}
+          "Button component prop appcount value: "{this.props.appCount} stops
+          re-rendering at 5,6,7.
+        </span>
       </>
     );
   }
