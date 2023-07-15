@@ -14,7 +14,7 @@ function clickMe(): string {
 root.render(
   <StrictMode>
     <App
-      heading={'React'}
+      heading={'ReactJS'}
       paragraph={'React Code '}
       buttonText={'Jai React'}
       buttonClick={function (): string {

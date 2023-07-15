@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from './ButtonComponent';
 import './style.css';
 
 interface AppProps {
@@ -31,6 +32,7 @@ class App extends React.Component<AppProps, State> {
   };
 
   render() {
+    console.log(this);
     return (
       <>
         <h1>{this.heading}</h1>
@@ -38,6 +40,7 @@ class App extends React.Component<AppProps, State> {
         <p>{this.paragraph}</p>
         <span>{this.state.count}</span>
         <button onClick={this.incrementCounter}>{this.state.count}</button>
+        <Button />
       </>
     );
   }
